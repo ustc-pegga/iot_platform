@@ -41,51 +41,55 @@
 </template>
 
 <script>
-import GithubCorner from '@/components/GithubCorner'
+// import GithubCorner from '@/components/GithubCorner'
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
-import RaddarChart from './components/RaddarChart'
-import PieChart from './components/PieChart'
-import BarChart from './components/BarChart'
+// import RaddarChart from './components/RaddarChart'
+// import PieChart from './components/PieChart'
+// import BarChart from './components/BarChart'
 import TransactionTable from './components/TransactionTable'
-import TodoList from './components/TodoList'
-import BoxCard from './components/BoxCard'
+// import TodoList from './components/TodoList'
+// import BoxCard from './components/BoxCard'
 
 const lineChartData = {
-  newVisitis: {
-    expectedData: [100, 120, 161, 134, 105, 160, 165],
-    actualData: [120, 82, 91, 154, 162, 140, 145]
+  Day: {
+    expectedData: [100, 120, 161, 134, 105, 160, 165, 123],
+    actualData: [120, 82, 91, 154, 162, 140, 145, 123],
+    type: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00']
   },
-  messages: {
+  Week: {
     expectedData: [200, 192, 120, 144, 160, 130, 140],
-    actualData: [180, 160, 151, 106, 145, 150, 130]
+    actualData: [180, 160, 151, 106, 145, 150, 130],
+    type: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   },
-  purchases: {
-    expectedData: [80, 100, 121, 104, 105, 90, 100],
-    actualData: [120, 90, 100, 138, 142, 130, 130]
+  Month: {
+    expectedData: [80, 100, 121, 104, 105, 90, 100, 123, 132, 111, 102, 123, 324, 456],
+    actualData: [120, 90, 100, 138, 142, 130, 130, 123, 132, 111, 102, 123, 324, 456],
+    type: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   },
-  shoppings: {
+  Year: {
     expectedData: [130, 140, 141, 142, 145, 150, 160],
-    actualData: [120, 82, 91, 154, 162, 140, 130]
+    actualData: [120, 82, 91, 154, 162, 140, 130],
+    type: ['2016', '2017', '2018', '2019', '2020', '2021', '2022']
   }
 }
 
 export default {
   name: 'DashboardAdmin',
   components: {
-    GithubCorner,
+    // GithubCorner,
     PanelGroup,
     LineChart,
-    RaddarChart,
-    PieChart,
-    BarChart,
-    TransactionTable,
-    TodoList,
-    BoxCard
+    // RaddarChart,
+    // PieChart,
+    // BarChart,
+    TransactionTable
+    // TodoList,
+    // BoxCard
   },
   data() {
     return {
-      lineChartData: lineChartData.newVisitis
+      lineChartData: lineChartData.Day
     }
   },
   methods: {

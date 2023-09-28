@@ -41,6 +41,14 @@ export default {
       list: null
     }
   },
+  // watch: {
+  //     active(val) {
+  //       this.$nextTick(() => {
+  //         this.$refs.Chart.resize();
+  //       })
+  //     }
+  //   },
+
   created() {
     this.fetchData()
   },
