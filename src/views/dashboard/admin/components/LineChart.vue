@@ -33,7 +33,8 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      color_list: ['#FF005A', '#3888fa', '#66e0e3', '#ffc300', '#8663e1', '#00bfaa', '#ff6f00', '#7e57c2', '#5c6bc0', '#42a5f5', '#29b6f6', '#26c6da', '#26a69a', '#66bb6a', '#9ccc65', '#d4e157', '#ffee58', '#ffca28', '#ffa726', '#ff7043', '#8d6e63', '#bdbdbd', '#78909c']
     }
   },
   watch: {
@@ -61,10 +62,43 @@ export default {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
     },
-    setOptions({ expectedData, actualData, type } = {}) {
+    setOptions(data) {
+      const series = []
+      const legend = []
+      var xarix = []
+      var idx = 0
+      console.log(data)
+      for (const key in data) {
+        const item = data[key]
+        legend.push(item.name)
+        xarix = item.type
+        series.push({
+          name: item.name,
+          type: 'line',
+          data: item.data,
+          itemStyle: {
+            normal: {
+              color: this.color_list[idx],
+              lineStyle: {
+                color: this.color_list[idx],
+                width: 2
+              }
+            }
+          },
+          smooth: true,
+          animationDuration: 2800,
+          animationEasing: 'cubicInOut'
+        })
+        idx++
+      }
+      console.log(series)
+      console.log(legend)
+      console.log(xarix)
+      this.chart.clear()
       this.chart.setOption({
         xAxis: {
-          data: type,
+          name: '时间',
+          data: xarix.flat(),
           boundaryGap: false,
           axisTick: {
             show: false
@@ -85,49 +119,15 @@ export default {
           padding: [5, 10]
         },
         yAxis: {
+          name: legend[0],
           axisTick: {
             show: false
           }
         },
         legend: {
-          data: ['expected', 'actual']
+          data: legend
         },
-        series: [{
-          name: 'expected', itemStyle: {
-            normal: {
-              color: '#FF005A',
-              lineStyle: {
-                color: '#FF005A',
-                width: 2
-              }
-            }
-          },
-          smooth: true,
-          type: 'line',
-          data: expectedData,
-          animationDuration: 2800,
-          animationEasing: 'cubicInOut'
-        },
-        {
-          name: 'actual',
-          smooth: true,
-          type: 'line',
-          itemStyle: {
-            normal: {
-              color: '#3888fa',
-              lineStyle: {
-                color: '#3888fa',
-                width: 2
-              },
-              areaStyle: {
-                color: '#f3f8ff'
-              }
-            }
-          },
-          data: actualData,
-          animationDuration: 2800,
-          animationEasing: 'quadraticOut'
-        }]
+        series: series
       })
     }
   }
